@@ -109,7 +109,7 @@ class Toggle(object):
 if __name__ == "__main__":
     toggle = Toggle(filename='./README.md',
                     url_prefix='https://github.com/Microndgt/toggle')
-    print(''.join(toggle.generate()))
+    print(''.join(toggle.update()))
 
 
 

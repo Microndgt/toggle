@@ -4,6 +4,7 @@ Contents
 - [Usage](https://github.com/Microndgt/toggle#usage)
   - [QuickStart](https://github.com/Microndgt/toggle#quickstart)
   - [arguments of Toggle](https://github.com/Microndgt/toggle#arguments-of-toggle)
+- [Example](https://github.com/Microndgt/toggle#example)
 - [Author](https://github.com/Microndgt/toggle#author)
 
 # toggle
