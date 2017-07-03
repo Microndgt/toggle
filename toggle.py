@@ -32,6 +32,9 @@ class Toggle(object):
                 " ": "-",
                 "/": "",
                 "\.": "",  # 正则表达式字符需要转义
+                "`": "",
+                "\(": "",
+                "\)": "",
                 "[A-Z]": "lambda x: x.group().lower()"  # 转换成小写
         }
         self.match_rules = match_rules or {
@@ -39,6 +42,7 @@ class Toggle(object):
             '---': "  - "
         }
         self.default_start = ["Contents\n", "===\n", "\n"]
+        self.default_end = ["Contents Created by [Toggle](https://github.com/Microndgt/toggle)\n"]
 
     def parse(self, contents):
         _last = None
@@ -78,23 +82,23 @@ class Toggle(object):
         contents.extend(self.content)
         return contents
 
-    def _toggle(self, contents=None):
-        if not contents:
+    def _toggle(self, _contents=None):
+        if not _contents:
             print("data is empty")
             return []
 
-        if contents[0] == self.default_start[0]:
+        if _contents[0] == self.default_start[0]:
             print("already has a content")
             return []
 
-        _contents = self.default_start
+        _results = self.default_start
 
         _matched = False
         try:
-            for match_line, matcher in self.parse(contents):
+            for match_line, matcher in self.parse(_contents):
                 _matched = True
                 line = self.format(match_line, matcher)
-                _contents.append(line)
+                _results.append(line)
         except ContentErrorException as e:
             print(str(e))
             return []
@@ -102,8 +106,10 @@ class Toggle(object):
         if not _matched:
             return []
 
-        _contents.append("\n")
-        return _contents
+        _results.append("\n")
+        _results.extend(self.default_end)
+        _results.append("\n")
+        return _results
 
 
 if __name__ == "__main__":
